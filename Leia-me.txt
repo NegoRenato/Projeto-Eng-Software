@@ -1,0 +1,9 @@
+Processo para instalação e utilização do jogo Guardião dos Biomas.
+
+Instalação: A instalação do jogo e bem simples basta extrair a pasta em qualquer diretorio do seu computador(recomendo
+deixar na area de trabalho para uma execução mais rapida).
+
+Utilização: Para jogar o jogo deve clicar com o botão direito do mouse no index.html, e ir com o mouse até
+'abrir com', e depois escolher o navegador de sua preferencia.
+
+Dentro da pasta 'GuardiaoDosBiomas' tem um pdf com o link de um video mostrando como jogar o jogo, e seu funcionamento.

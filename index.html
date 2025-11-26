@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guardião dos Biomas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <audio id="som-acerto" src="assets/audio/[Donkey Kong 2 OST] All 15 Stage Clear Jingles (Generic) - Jigashi (youtube).mp3" preload="auto"></audio>
+
+    <audio id="bg-music" loop>
+        <source src="assets/audio/forest-ambience-296528.mp3" type="audio/mpeg">
+    </audio>
+    
+    <button id="btn-audio-toggle" class="audio-control" title="Ligar/Desligar Som">🔊</button>
+
+    <main id="app-container">
+        
+        <section id="login-screen" class="screen active">
+            <h2>🌳 Guardião dos Biomas 🐅</h2>
+            <p>Identifique-se para começar:</p>
+            <div class="form-container">
+                <input type="text" id="login-name" placeholder="Digite seu nome" autocomplete="off">
+                <button id="btn-login-continuar" disabled>Entrar</button>
+                <button id="btn-login-cadastro" class="secondary-btn">Criar Novo Cadastro</button>
+            </div>
+            <div style="margin-top: 30px; font-size: 0.8rem;">
+                <button id="btn-reset-dados" style="background: none; border: none; color: #555; cursor: pointer; padding: 5px;">🗑️ Resetar Dados (Limpar Cache)</button>
+            </div>
+        </section>
+
+        <section id="cadastro-screen" class="screen">
+            <h2>📜 Novo Guardião</h2>
+            <div class="form-container">
+                <input type="text" id="cadastro-name" placeholder="Seu Nome Completo">
+                <select id="cadastro-permission">
+                    <option value="" disabled selected>Selecione o Tipo</option>
+                    <option value="Aluno">Aluno</option>
+                    <option value="Professor">Professor</option>
+                </select>
+                <button id="btn-cadastro-cadastrar" disabled>Cadastrar</button>
+                <button id="btn-cadastro-voltar" class="secondary-btn">Voltar</button>
+            </div>
+        </section>
+
+        <section id="menu-principal-screen" class="screen">
+            <h2>🗺️ Mapa do Aluno</h2>
+            <p>Bem-vindo(a), <span id="student-name-display" style="font-weight: bold; color: #2E7D32;"></span>!</p>
+            <div class="menu-options">
+                <button id="btn-menu-iniciar">▶️ Iniciar Jogo Completo</button>
+                <button id="btn-menu-selecao-fase">📍 Selecionar Fase</button>
+                <button id="btn-menu-resultados">📊 Meus Resultados</button>
+                <button id="btn-menu-sair" class="secondary-btn">Sair</button>
+            </div>
+        </section>
+
+        <section id="professor-screen" class="screen">
+            <div class="header-fase"><h2>🎓 Painel do Professor</h2></div>
+            <p>Selecione um aluno para ver o relatório:</p>
+            <div id="lista-alunos-container" class="student-list"></div>
+            <button id="btn-prof-sair" class="secondary-btn" style="margin-top: 20px;">Sair</button>
+        </section>
+
+        <section id="selecao-fase-screen" class="screen">
+            <h2>Escolha uma Aventura</h2>
+            <div class="menu-options">
+                <button id="btn-fase-1-select">🗺️ Fase 1: Geografia (Mapas)</button>
+                <button id="btn-fase-2-select">🦁 Fase 2: Fauna e Flora (Quiz)</button>
+                <button id="btn-selecao-voltar" class="secondary-btn">Voltar ao Menu</button>
+            </div>
+        </section>
+
+        <section id="fase-1-screen" class="screen">
+            <div class="header-fase">
+                <h2 id="fase-1-title">Fase 1</h2>
+                <div class="score-board">Pontos: <span id="score-fase1">0</span></div>
+            </div>
+            <div class="game-area" id="game-area-fase1">
+                <p class="instruction-text">Observe o mapa abaixo. Qual bioma fica na região destacada?</p>
+                <div class="map-container">
+                    <img id="img-mapa-fase1" src="" alt="Mapa do Brasil com destaque">
+                </div>
+                <div id="fase-1-options" class="options-grid"></div>
+                
+                <div class="controls-wrapper">
+                    <button id="btn-dica-fase1" class="hint-btn" title="Custa 25 pontos">💡 Pedir Dica (-25pts)</button>
+                    <div class="controls">
+                        <button id="btn-fase-1-verificar" disabled>✅ Confirmar</button>
+                        <button id="btn-fase-1-voltar" class="secondary-btn">❌ Sair</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="fase-2-screen" class="screen">
+            <div class="header-fase">
+                <h2 id="fase-2-title">Fase 2</h2>
+                <div class="score-board">Pontos: <span id="score-fase2">0</span></div>
+            </div>
+            <div class="game-area" id="game-area-fase2">
+                <div class="question-box">
+                    <p id="fase-2-question">Carregando pergunta...</p>
+                </div>
+                <div id="fase-2-options" class="options-grid"></div>
+                
+                <div class="controls-wrapper">
+                    <button id="btn-dica-fase2" class="hint-btn" title="Custa 25 pontos">💡 Pedir Dica (-25pts)</button>
+                    <div class="controls">
+                        <button id="btn-fase-2-verificar" disabled>✅ Confirmar</button>
+                        <button id="btn-fase-2-voltar" class="secondary-btn">❌ Sair</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resultados-screen" class="screen">
+            <h2 style="text-align: center;">🏆 Relatório de Desempenho</h2>
+            <div class="summary-box">
+                <p><strong>Aluno:</strong> <span id="resumo-nome">--</span></p>
+                <p><strong>Pontuação Final:</strong> <span id="resumo-pontos" style="color: #2E7D32; font-weight: bold;">0</span></p>
+                <p><strong>Tempo Total:</strong> <span id="resumo-tempo">0s</span></p>
+            </div>
+            <div class="table-container">
+                <table id="tabela-detalhes">
+                    <thead>
+                        <tr><th>Fase</th><th>Questão</th><th>Erros</th><th>Dica Usada?</th><th>Tempo</th></tr>
+                    </thead>
+                    <tbody id="tabela-corpo"></tbody>
+                </table>
+            </div>
+            <button id="btn-resultados-voltar" style="margin-top: 20px;">Voltar</button>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
